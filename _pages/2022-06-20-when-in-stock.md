@@ -69,6 +69,7 @@ cd WhenInStock
 
 # Pull the latest Docker image
 sudo docker pull ericjmarti/inventory-hunter:latest
+```bash
 
 ### 2. Configuration
 Create your own configuration file based on the provided examples (e.g., Amazon RTX 3080, Newegg RTX 3070).
