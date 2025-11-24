@@ -1,0 +1,14 @@
+---
+layout: home
+author_profile: true
+header:
+  overlay_filter: 0.5
+---
+
+## 🚀 Projects
+
+Here are some of the projects I have worked on.
+
+{% for post in site.posts %}
+  {% include archive-single.html type="grid" teaser=post.header.teaser %}
+{% endfor %}
