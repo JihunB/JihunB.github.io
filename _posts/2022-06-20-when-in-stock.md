@@ -14,17 +14,13 @@ header:
   teaser: /assets/images/WhenInStock.png # Make sure to add a thumbnail image with this name
 sidebar:
   - title: "Role"
-    image: /assets/images/profile.jpg # Optional: Your profile picture path
-    image_alt: "logo"
+    image: /assets/images/profile.jpg # 지훈님의 프로필 사진 경로 확인
+    image_alt: "profile"
     text: "Developer & Maintainer"
   - title: "Tech Stack"
     text: "Docker, Raspberry Pi, Bash, Webhooks"
   - title: "Source Code"
-    text: "View the full source code and documentation."
-    nav:
-      - name: "View on GitHub"
-        link: "https://github.com/JihunB/WhenInStock"
-        icon: "fab fa-fw fa-github"
+    text: "View the full source code and documentation.<br><br>[View on GitHub](https://github.com/JihunB/WhenInStock){: .btn .btn--primary .btn--large}"
 ---
 
 ![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)
