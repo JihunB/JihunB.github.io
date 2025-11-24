@@ -1,0 +1,8 @@
+# _config.yml
+title: Jihun's Portfolio
+author: Jihun
+description: "Security Researcher & Developer Portfolio"
+remote_theme: mmistakes/minimal-mistakes
+plugins:
+  - jekyll-include-cache
+  - jekyll-remote-theme
