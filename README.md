@@ -13,9 +13,3 @@ author_profile: true # 왼쪽에 내 프로필 사진 나오게 하기
 ## 🚀 Projects
 
 These are my main IT projects:
-
-{% include feature_row id="intro" type="center" %} # (선택사항)
-
-{% for post in site.posts %}
-  {% include archive-single.html type="grid" teaser=post.header.teaser %}
-{% endfor %}
