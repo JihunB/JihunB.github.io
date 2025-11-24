@@ -14,7 +14,7 @@ header:
   teaser: /assets/images/WhenInStock.png # Make sure to add a thumbnail image with this name
 sidebar:
   - title: "Role"
-    image: /assets/images/profile.png # Optional: Your profile picture path
+    image: /assets/images/profile.jpg # Optional: Your profile picture path
     image_alt: "logo"
     text: "Developer & Maintainer"
   - title: "Tech Stack"
