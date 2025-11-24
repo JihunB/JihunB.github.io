@@ -144,17 +144,18 @@ Developed the core backend logic for the bulletin board system using PHP.
 
 - Board Functions:
 
--- create_posts.php: Write new posts with file attachments.
+create_posts.php: Write new posts with file attachments.
 
--- list_posts.php: Display list of posts from MySQL.
+list_posts.php: Display list of posts from MySQL.
 
--- edit_post.php / delete_post.php: Modify or remove content.
+edit_post.php / delete_post.php: Modify or remove content.
+
 
 - Infrastructure as Code:
 
--- Dockerfile.php & Dockerfile.db: Containerization setup for future migration.
+Dockerfile.php & Dockerfile.db: Containerization setup for future migration.
 
--- docker-compose.yml: Orchestration configuration.
+docker-compose.yml: Orchestration configuration.
 
 ## Conclusion
 This project successfully established a secure and functional LAMP environment. By manually configuring Apache ports and MySQL permissions, I gained a deep understanding of server administration, which serves as a strong foundation for my cybersecurity studies.
