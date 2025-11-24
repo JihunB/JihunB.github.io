@@ -4,11 +4,12 @@ permalink: /
 title: "Jihun's Portfolio"
 author_profile: true
 header:
+  overlay_image: /assets/images/main-banner.jpg # 이미지가 없으면 기본값
   overlay_filter: 0.5
 ---
 
 <style>
-  /* 겹침 방지 및 그리드 간격 조정 */
+  /* 카드 정렬을 위한 스타일 */
   .entries-grid {
     display: flex;
     flex-wrap: wrap;
@@ -16,19 +17,19 @@ header:
     justify-content: flex-start;
   }
   .grid__item {
-    width: calc(50% - 20px); /* 2열 배치 */
+    width: calc(50% - 20px);
     margin-bottom: 2em;
   }
   @media (max-width: 768px) {
     .grid__item {
-      width: 100%; /* 모바일에서는 1열 배치 */
+      width: 100%;
     }
   }
 </style>
 
-## 🚀 Projects
+<h2 class="archive__subtitle">🚀 Projects</h2>
 
-Here are some of the projects I have worked on.
+<p>Here are some of the projects I have worked on.</p>
 
 <div class="entries-grid">
   {% for post in site.posts %}
