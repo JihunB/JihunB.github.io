@@ -1,14 +1,37 @@
 ---
-layout: home
+layout: archive
+permalink: /
+title: "Jihun's Portfolio"
 author_profile: true
 header:
   overlay_filter: 0.5
 ---
 
-🚀 Projects
+<style>
+  /* 겹침 방지 및 그리드 간격 조정 */
+  .entries-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+  .grid__item {
+    width: calc(50% - 20px); /* 2열 배치 */
+    margin-bottom: 2em;
+  }
+  @media (max-width: 768px) {
+    .grid__item {
+      width: 100%; /* 모바일에서는 1열 배치 */
+    }
+  }
+</style>
+
+## 🚀 Projects
 
 Here are some of the projects I have worked on.
 
-{% for post in site.posts %}
-  {% include archive-single.html type="grid" teaser=post.header.teaser %}
-{% endfor %}
+<div class="entries-grid">
+  {% for post in site.posts %}
+    {% include archive-single.html type="grid" teaser=post.header.teaser %}
+  {% endfor %}
+</div>
