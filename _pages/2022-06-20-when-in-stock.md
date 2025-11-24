@@ -119,7 +119,7 @@ This project is a fork of the original Inventory Hunter. I have made the followi
 
 **3. Price Logic Adjustment:** Adjusted target price thresholds to reflect falling average market prices.
 
-**4. Error Logging: ** Consolidated frequent runtime errors into CheckError.txt for easier debugging and maintenance.
+**4. Error Logging:** Consolidated frequent runtime errors into CheckError.txt for easier debugging and maintenance.
 
 ## Managing the Container
 Stop and remove containers:
