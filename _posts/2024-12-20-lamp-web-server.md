@@ -63,7 +63,8 @@ sudo systemctl enable apache2
 sudo systemctl status apache2
 ```
 
-**Configuration Changes**
+**Configuration Changes**  
+
   Modified /etc/apache2/ports.conf: Added Listen 8081
 
   Modified VirtualHost configuration: <VirtualHost *:8081>
