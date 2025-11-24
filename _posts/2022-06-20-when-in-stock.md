@@ -1,4 +1,5 @@
 ---
+layout: single
 title: "WhenInStock - Real-time Stock Availability Notifier"
 excerpt: "An open-source automation tool using Docker and Raspberry Pi to track high-demand product availability and send real-time alerts via Webhooks."
 categories:
