@@ -12,16 +12,16 @@ tags:
   - MySQL
   - PHP
 header:
-  teaser: /assets/images/lamp_thumbnail.png # 썸네일 이미지를 이 이름으로 assets/images에 넣어주세요
+  teaser: /assets/images/lamp_thumbnail.png
 sidebar:
   - title: "Role"
     image: /assets/images/profile.jpg
     image_alt: "profile"
     text: "Cloud Engineer & Backend Developer"
   - title: "Tech Stack"
-    text: "AWS Lightsail, Ubuntu Linux, Apache2, MySQL 8.0, PHP 8"
+    text: "AWS Lightsail, Ubuntu Linux, Apache2, MySQL 8.0, PHP 8, Docker"
   - title: "Source Code"
-    text: "View the full source code and documentation.<br><br>[View on GitHub](https://github.com/JihunB/KnockOn){: .btn .btn--primary .btn--large}"
+    text: "View the full source code and documentation. <br><br> [View on GitHub](https://github.com/JihunB/KnockOn){: .btn .btn--primary .btn--large}"
 ---
 
 ![AWS](https://img.shields.io/badge/AWS-Lightsail-232F3E?logo=amazon-aws&logoColor=white)
