@@ -113,13 +113,13 @@ Run with the query flag -q:
 ## 👨‍💻 My Contributions
 This project is a fork of the original Inventory Hunter. I have made the following specific contributions to improve stability and usability:
 
-Link Optimization: Curated and reorganized product links, prioritizing those most likely to be restocked.
+**1. Link Optimization:** Curated and reorganized product links, prioritizing those most likely to be restocked.
 
-Anti-Bot Evasion: Removed links that triggered heavy Captcha security, which previously interrupted the 2-second refresh cycle and slowed down the program.
+**2. Anti-Bot Evasion:** Removed links that triggered heavy Captcha security, which previously interrupted the 2-second refresh cycle and slowed down the program.
 
-Price Logic Adjustment: Adjusted target price thresholds to reflect falling average market prices.
+**3. Price Logic Adjustment:** Adjusted target price thresholds to reflect falling average market prices.
 
-Error Logging: Consolidated frequent runtime errors into CheckError.txt for easier debugging and maintenance.
+**4. Error Logging: ** Consolidated frequent runtime errors into CheckError.txt for easier debugging and maintenance.
 
 ## Managing the Container
 Stop and remove containers:
