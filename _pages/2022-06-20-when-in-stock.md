@@ -78,18 +78,18 @@ Create your own configuration file based on the provided examples (e.g., Amazon 
 Start the Docker container using the provided bash script. You must specify the config file and your webhook details.
 
 Example: Discord Alert
-'''bash
+```bash
 ./docker_run.bash -c ./config/newegg_rtx_3070.yaml -a discord -w [https://discord.com/api/webhooks/](https://discord.com/api/webhooks/)...
-''' 
+```
 
 Example: SMTP (Email) Alert
-'''bash
+```bash
 ./docker_run.bash -c ./config/newegg_rtx_3070.yaml -e myemail@email.com -r 127.0.0.1
-''' 
+``` 
 
 # ⚙️ Advanced Configuration: Multiple Alerters
 To use multiple notification methods simultaneously, create a alerters.yaml file in the config directory.
-'''bash
+```bash
 alerters:
   discord:
     webhook_url: [https://discord.com/api/webhooks/YOUR_WEBHOOK_KEY](https://discord.com/api/webhooks/YOUR_WEBHOOK_KEY)
@@ -103,12 +103,12 @@ alerters:
     recipients:
       - myemail@email.com
     relay: 127.0.0.1
-'''
+```
 Run with the query flag -q:
 
-'''bash
+```bash
 ./docker_run.bash -c ./config/newegg_rtx_3070.yaml -q ./config/alerters.yaml
-'''
+```
 
 ## 👨‍💻 My Contributions
 This project is a fork of the original Inventory Hunter. I have made the following specific contributions to improve stability and usability:
@@ -123,12 +123,12 @@ Error Logging: Consolidated frequent runtime errors into CheckError.txt for easi
 
 ## Managing the Container
 Stop and remove containers:
-'''bash
+```bash
 docker stop CONTAINER_NAME
 docker rm CONTAINER_NAME
-'''
+```
 
 Update the repository:
-'''bash
+```bash
 git pull
-'''
+```
