@@ -62,4 +62,36 @@ def prepro(data):
     # ... (additional feature extraction)
     return data[['method', 'sql', 'word', ...]]
 ```
-🤖 Model Development & EvaluationI trained and compared three different classification models to find the best performer:Random Forest ClassifierLogistic RegressionXGBoost🏆 ResultsRandom Forest demonstrated the best performance with stable detection rates across major attack types.Overall Accuracy: 92.6%Brute Force F1-Score: 0.99 (Near perfect detection)SQL Injection F1-Score: 0.93Classification Report (Random Forest):ClassPrecisionRecallF1-ScoreBrute Force0.991.000.99SQL Injection1.000.870.93Normal0.930.990.96XSS0.550.870.67(Note: While Brute Force and SQLi detection were excellent, XSS and System Cmd Execution showed room for improvement, highlighting areas for future feature engineering.)📈 Feature Importance AnalysisUsing the Random Forest model, I analyzed which features contributed most to detection.'word' feature (Tool Signatures): Highest importance. This indicates that attack tool signatures (e.g., Hydra, Sqlmap) are critical indicators.'method' (GET/POST): Significant for distinguishing payload types.🎯 ConclusionThis project successfully demonstrated that machine learning can automate the classification of network attacks with high accuracy. By shifting from static rules to dynamic feature learning, the system can more effectively handle high-volume traffic and aid security analysts in rapid triage.Future Improvements:Implementing Deep Learning (RNN/LSTM) to better understand payload sequences for improving XSS detection.Deploying the model as a real-time API service.
+### 🤖 Model Development & Evaluation
+I trained and compared three different classification models to find the best performer:
+**1. Random Forest Classifier
+2. Logistic Regression
+3. XGBoost**
+
+**Results**
+**Random Forest** demonstrated the best performance with stable detection rates across major attack types.
+- **Overall Accuracy:** 92.6%
+- **Brute Force F1-Score:** 0.99 (Near perfect detection)
+- **SQL Injection F1-Score:** 0.93
+
+**Classification Report (Random Forest):**
+Class,            Precision    Recall  F1-Score
+**Brute Force**     0.99        1.00    0.99
+**SQL Injection**   1.00        0.87    0.93
+**Normal**          0.93        0.99    0.96
+**XSS**             0.55        0.87    0.67
+
+(Note: While Brute Force and SQLi detection were excellent, XSS and System Cmd Execution showed room for improvement, highlighting areas for future feature engineering.)
+
+### Feature Importance Analysis
+Using the Random Forest model, I analyzed which features contributed most to detection.
+- **'word' feature (Tool Signatures):**
+Highest importance. This indicates that attack tool signatures (e.g., Hydra, Sqlmap) are critical indicators.
+- **'method' (GET/POST):**
+Significant for distinguishing payload types.
+
+🎯 Conclusion
+This project successfully demonstrated that machine learning can automate the classification of network attacks with high accuracy. By shifting from static rules to dynamic feature learning, the system can more effectively handle high-volume traffic and aid security analysts in rapid triage.
+
+**Future Improvements:**
+- Implementing **Deep Learning (RNN/LSTM)** to better understand payload sequences for improving XSS detection.Deploying the model as a real-time API service.
