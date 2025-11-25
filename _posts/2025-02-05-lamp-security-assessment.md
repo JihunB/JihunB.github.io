@@ -15,7 +15,7 @@ header:
   teaser: /assets/images/lamp_security.png # 썸네일 이미지 경로
 sidebar:
   - title: "Role"
-    image: /assets/images/profile.png
+    image: /assets/images/profile.jpg
     image_alt: "profile"
     text: "Security Researcher & Pentester"
   - title: "Vulnerabilities Found"
