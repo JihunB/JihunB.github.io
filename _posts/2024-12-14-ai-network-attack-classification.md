@@ -75,11 +75,7 @@ I trained and compared three different classification models to find the best pe
 - **SQL Injection F1-Score:** 0.93
 
 **Classification Report (Random Forest):**
-Class,            Precision    Recall  F1-Score
-**Brute Force**     0.99        1.00    0.99
-**SQL Injection**   1.00        0.87    0.93
-**Normal**          0.93        0.99    0.96
-**XSS**             0.55        0.87    0.67
+![Report](/assets/images/report.jpeg)
 
 (Note: While Brute Force and SQLi detection were excellent, XSS and System Cmd Execution showed room for improvement, highlighting areas for future feature engineering.)
 
