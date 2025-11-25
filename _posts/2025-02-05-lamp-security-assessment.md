@@ -12,7 +12,7 @@ tags:
   - XSS
   - Patching
 header:
-  teaser: /assets/images/security_audit_thumbnail.jpg # 썸네일 이미지 경로
+  teaser: /assets/images/lamp_security.png # 썸네일 이미지 경로
 sidebar:
   - title: "Role"
     image: /assets/images/profile.png
