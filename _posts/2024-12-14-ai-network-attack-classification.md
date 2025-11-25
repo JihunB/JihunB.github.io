@@ -90,7 +90,7 @@ Highest importance. This indicates that attack tool signatures (e.g., Hydra, Sql
 - **'method' (GET/POST):**
 Significant for distinguishing payload types.
 
-🎯 Conclusion
+### 🎯 Conclusion
 This project successfully demonstrated that machine learning can automate the classification of network attacks with high accuracy. By shifting from static rules to dynamic feature learning, the system can more effectively handle high-volume traffic and aid security analysts in rapid triage.
 
 **Future Improvements:**
