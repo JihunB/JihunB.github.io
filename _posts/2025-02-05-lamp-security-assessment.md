@@ -21,7 +21,7 @@ sidebar:
   - title: "Vulnerabilities Found"
     text: "RCE, SQL Injection, XSS, IDOR, Info Leak"
   - title: "Report"
-    text: "View the full vulnerability report and patched code.<br><br>[View on GitHub](https://github.com/JihunB/YOUR_REPO_NAME){: .btn .btn--primary .btn--large}"
+    text: "View the full vulnerability report and patched code.<br><br>[View on GitHub](https://github.com/JihunB/LAMP_BulletinBoard){: .btn .btn--primary .btn--large}"
 ---
 
 ![OWASP](https://img.shields.io/badge/Standard-OWASP%20Top%2010-black?logo=owasp&logoColor=white)
