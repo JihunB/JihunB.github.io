@@ -30,29 +30,28 @@ header:
     padding: 0 !important;
   }
 
-  /* --- 2. 카드 디자인 업그레이드 --- */
+  /* --- 2. 카드 디자인 --- */
   .archive__item {
     height: 100%;
     display: flex;
     flex-direction: column;
     background: #ffffff;
     border: 1px solid #eaeaea;
-    border-radius: 12px; /* 더 둥글게 */
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03); /* 은은한 그림자 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     transition: all 0.3s ease;
-    text-decoration: none; /* 링크 밑줄 제거 */
+    text-decoration: none;
   }
 
-  /* 마우스 올렸을 때 효과 */
   .archive__item:hover {
     transform: translateY(-7px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    border-color: #3498db; /* 테두리 파란색으로 변경 */
+    border-color: #3498db;
   }
 
   .archive__item:hover .archive__item-title {
-    color: #3498db; /* 제목 파란색으로 변경 */
+    color: #3498db;
   }
 
   /* --- 3. 이미지 스타일 --- */
@@ -71,12 +70,11 @@ header:
     transition: transform 0.5s ease;
   }
 
-  /* 이미지 확대 효과 */
   .archive__item:hover .archive__item-teaser img {
     transform: scale(1.05);
   }
 
-  /* --- 4. 텍스트 및 태그 영역 --- */
+  /* --- 4. 텍스트 영역 --- */
   .archive__item-body {
     padding: 24px;
     flex-grow: 1;
@@ -102,38 +100,61 @@ header:
     flex-grow: 1;
   }
 
-  /* 기술 스택 태그 (Pills) */
+  /* --- 5. 기술 스택 태그 (색상 커스텀) --- */
   .tech-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: auto; /* 항상 바닥에 붙게 함 */
+    gap: 6px;
+    margin-top: auto;
   }
 
   .tech-tag {
-    font-size: 0.75em;
-    font-weight: 600;
-    background-color: #f0f2f5;
-    color: #555;
+    font-size: 0.7em;
+    font-weight: 700;
     padding: 4px 10px;
-    border-radius: 20px;
+    border-radius: 4px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    color: #555; /* 기본 글자색 */
+    background-color: #f0f2f5; /* 기본 배경색 */
+    border: 1px solid #ddd;
   }
 
-  /* 인트로 섹션 꾸미기 */
+  /* ★ 태그별 고유 색상 설정 (여기에 계속 추가하면 됩니다) */
+  
+  /* Python: 파랑/노랑 계열 */
+  .tag-python { background-color: #3776AB; color: white; border-color: #3776AB; }
+  
+  /* Docker: 파란색 */
+  .tag-docker { background-color: #2496ED; color: white; border-color: #2496ED; }
+  
+  /* Security/Hacking: 빨간색 */
+  .tag-security, .tag-web-hacking, .tag-penetration-testing, .tag-ctf, .tag-sqli { 
+    background-color: #e74c3c; color: white; border-color: #c0392b; 
+  }
+  
+  /* Infrastructure/AWS: 주황/진한파랑 */
+  .tag-infrastructure, .tag-aws { background-color: #232F3E; color: white; border-color: #232F3E; }
+  
+  /* Database: 초록/청록 */
+  .tag-mysql, .tag-database, .tag-sql-injection { background-color: #4479A1; color: white; border-color: #4479A1; }
+  
+  /* Web/Flask: 회색/검정 */
+  .tag-flask, .tag-web-development, .tag-php { background-color: #000; color: white; border-color: #000; }
+
+  /* AI: 보라색 */
+  .tag-ai, .tag-machine-learning, .tag-xgboost { background-color: #8e44ad; color: white; border-color: #8e44ad; }
+
+  /* 인트로 섹션 */
   .intro-section {
     text-align: center;
     margin-bottom: 40px;
     padding: 20px;
-    background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f8 100%);
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     border-radius: 10px;
+    border: 1px solid #eee;
   }
-  
-  .intro-section h2 {
-    margin-top: 0;
-    color: #2c3e50;
-  }
+  .intro-section h2 { margin-top: 0; color: #2c3e50; }
 </style>
 
 <div class="intro-section">
@@ -148,21 +169,19 @@ header:
   {% for post in site.posts %}
     <div class="grid__item">
       <a href="{{ post.url | relative_url }}" class="archive__item" rel="permalink">
-        
         {% if post.header.teaser %}
           <div class="archive__item-teaser">
             <img src="{{ post.header.teaser | relative_url }}" alt="{{ post.title }}">
           </div>
         {% endif %}
-        
         <div class="archive__item-body">
           <h3 class="archive__item-title">{{ post.title }}</h3>
-          
           <p class="archive__item-excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 120 }}</p>
-
+          
           {% if post.tags %}
             <div class="tech-tags">
-              {% for tag in post.tags limit:3 %} <span class="tech-tag">{{ tag }}</span>
+              {% for tag in post.tags limit:3 %}
+                <span class="tech-tag tag-{{ tag | slugify }}">{{ tag }}</span>
               {% endfor %}
             </div>
           {% endif %}
