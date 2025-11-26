@@ -1,7 +1,25 @@
 # _config.yml
-title: Jihun's Portfolio
-author: Jihun
-description: "Security Researcher & Developer Portfolio"
+
+title: "Security & Infrastructure Developer" # 사이트 제목
+description: "Jihun's Portfolio"
+
+# ★ 프로필 정보 ★
+author:
+  name: "Jihun Baek"             # 이름
+  avatar: "/assets/images/profile.jpg" 
+  bio: "Security Researcher & Infrastructure Developer" # 간단한 소개
+  location: "Sydney, Australia" # 위치
+  links: # 소셜 링크 
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "bjhbrian916@gmail.com"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/JihunB"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/jihun-baek-505544270"
+
 remote_theme: mmistakes/minimal-mistakes
 plugins:
   - jekyll-include-cache
