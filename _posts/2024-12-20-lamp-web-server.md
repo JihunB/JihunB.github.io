@@ -14,10 +14,6 @@ tags:
 header:
   teaser: /assets/images/lamp_thumbnail.png
 sidebar:
-  - title: "Role"
-    image: /assets/images/profile.jpg
-    image_alt: "profile"
-    text: "Cloud Engineer & Backend Developer"
   - title: "Tech Stack"
     text: "AWS Lightsail, Ubuntu Linux, Apache2, MySQL 8.0, PHP 8, Docker"
   - title: "Source Code"
