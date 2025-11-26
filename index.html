@@ -9,91 +9,146 @@ header:
 ---
 
 <style>
-  /* 1. 레이아웃 격자(Grid) 시스템 도입 */
+  /* --- 1. 전체 레이아웃 --- */
   .entries-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 무조건 2열로 고정 */
-    gap: 30px; /* 카드 사이 간격 */
-    align-items: start; /* 상단 정렬 */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    align-items: start;
+    margin-top: 40px;
   }
 
-  /* 모바일 화면에서는 1열로 변경 */
   @media (max-width: 768px) {
     .entries-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  /* 테마 기본 스타일 무력화 (Grid 충돌 방지) */
   .grid__item {
     width: 100% !important;
     margin-bottom: 0 !important;
     padding: 0 !important;
   }
 
-  /* 2. 카드 디자인 통일 (박스 형태) */
+  /* --- 2. 카드 디자인 업그레이드 --- */
   .archive__item {
-    height: 100%; /* 높이를 옆 카드와 맞춤 */
+    height: 100%;
     display: flex;
     flex-direction: column;
-    background: #fff;
-    border: 1px solid #e0e0e0; /* 연한 테두리 */
-    border-radius: 8px; /* 모서리 둥글게 */
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px; /* 더 둥글게 */
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* 살짝 그림자 */
-    transition: transform 0.2s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03); /* 은은한 그림자 */
+    transition: all 0.3s ease;
+    text-decoration: none; /* 링크 밑줄 제거 */
   }
 
+  /* 마우스 올렸을 때 효과 */
   .archive__item:hover {
-    transform: translateY(-5px); /* 마우스 올리면 살짝 떠오름 */
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    transform: translateY(-7px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: #3498db; /* 테두리 파란색으로 변경 */
   }
 
-  /* 3. 이미지 크기 및 비율 강제 통일 (핵심!) */
+  .archive__item:hover .archive__item-title {
+    color: #3498db; /* 제목 파란색으로 변경 */
+  }
+
+  /* --- 3. 이미지 스타일 --- */
   .archive__item-teaser {
-    height: 200px; /* ★ 모든 이미지 높이를 200px로 고정 */
+    height: 200px;
     width: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
     position: relative;
-    background-color: #f0f0f0; /* 이미지가 없을 때 회색 배경 */
+    background-color: #f4f4f4;
+    overflow: hidden;
   }
 
   .archive__item-teaser img {
     width: 100%;
     height: 100% !important;
-    object-fit: cover; /* ★ 이미지를 꽉 채우되 비율 유지 (넘치면 자름) */
-    object-position: center; /* 중앙 정렬 */
-    margin: 0 !important;
+    object-fit: cover;
+    transition: transform 0.5s ease;
   }
 
-  /* 텍스트 영역 스타일 */
+  /* 이미지 확대 효과 */
+  .archive__item:hover .archive__item-teaser img {
+    transform: scale(1.05);
+  }
+
+  /* --- 4. 텍스트 및 태그 영역 --- */
   .archive__item-body {
-    padding: 20px;
+    padding: 24px;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* 제목 스타일 */
   .archive__item-title {
     margin-top: 0;
-    font-size: 1.2em;
-    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #333;
+    transition: color 0.2s;
+    line-height: 1.4;
   }
   
   .archive__item-excerpt {
-    font-size: 0.9em;
+    font-size: 0.95em;
     color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+
+  /* 기술 스택 태그 (Pills) */
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto; /* 항상 바닥에 붙게 함 */
+  }
+
+  .tech-tag {
+    font-size: 0.75em;
+    font-weight: 600;
+    background-color: #f0f2f5;
+    color: #555;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* 인트로 섹션 꾸미기 */
+  .intro-section {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f8 100%);
+    border-radius: 10px;
+  }
+  
+  .intro-section h2 {
+    margin-top: 0;
+    color: #2c3e50;
   }
 </style>
 
-<h2 class="archive__subtitle">🚀 Recent Projects</h2>
-
-<p>Here are some of the projects I have worked on, focusing on automation, security, and infrastructure.</p>
+<div class="intro-section">
+  <h2 style="margin-bottom: 10px;">🚀 Portfolio Gallery</h2>
+  <p style="font-size: 1.1em; color: #555;">
+    Security · Infrastructure · Automation<br>
+    <span style="font-size: 0.9em;">Solving real-world problems with code.</span>
+  </p>
+</div>
 
 <div class="entries-grid">
   {% for post in site.posts %}
     <div class="grid__item">
-      <article class="archive__item">
+      <a href="{{ post.url | relative_url }}" class="archive__item" rel="permalink">
+        
         {% if post.header.teaser %}
           <div class="archive__item-teaser">
             <img src="{{ post.header.teaser | relative_url }}" alt="{{ post.title }}">
@@ -101,14 +156,18 @@ header:
         {% endif %}
         
         <div class="archive__item-body">
-          <h3 class="archive__item-title">
-            <a href="{{ post.url | relative_url }}" rel="permalink">{{ post.title }}</a>
-          </h3>
-          {% if post.excerpt %}
-            <p class="archive__item-excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 100 }}</p>
+          <h3 class="archive__item-title">{{ post.title }}</h3>
+          
+          <p class="archive__item-excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 120 }}</p>
+
+          {% if post.tags %}
+            <div class="tech-tags">
+              {% for tag in post.tags limit:3 %} <span class="tech-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
-      </article>
+      </a>
     </div>
   {% endfor %}
 </div>
