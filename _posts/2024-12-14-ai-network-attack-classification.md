@@ -13,10 +13,6 @@ tags:
 header:
   teaser: /assets/images/attack.png # 썸네일 이미지 경로
 sidebar:
-  - title: "Role"
-    image: /assets/images/profile.jpg
-    image_alt: "profile"
-    text: "AI Engineer & Security Researcher"
   - title: "Tech Stack"
     text: "Python, Pandas, Scikit-learn, XGBoost"
   - title: "Source Code"
