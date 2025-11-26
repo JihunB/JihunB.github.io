@@ -13,10 +13,6 @@ tags:
 header:
   teaser: /assets/images/WhenInStock.png # Make sure to add a thumbnail image with this name
 sidebar:
-  - title: "Role"
-    image: /assets/images/profile.jpg # 지훈님의 프로필 사진 경로 확인
-    image_alt: "profile"
-    text: "Developer & Maintainer"
   - title: "Tech Stack"
     text: "Docker, Raspberry Pi, Bash, Webhooks"
   - title: "Source Code"
