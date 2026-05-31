@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Based Network Attack Classifier — Jihun Baek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f7f4; --surface: #ffffff; --border: #e8e6e1;
+      --text-primary: #1a1917; --text-secondary: #6b6860; --text-muted: #9b9890;
+      --accent: #1d4ed8; --accent-light: #eff4ff;
+      --purple: #7c3aed; --purple-light: #faf5ff; --purple-border: #ddd6fe;
+      --green: #15803d; --green-light: #f0fdf4; --green-border: #bbf7d0;
+      --orange: #c2410c; --orange-light: #fff7ed; --orange-border: #fed7aa;
+      --red: #991b1b; --red-light: #fef2f2; --red-border: #fecaca;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-primary); font-size: 15px; line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(248,247,244,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-name { font-weight: 600; font-size: 15px; }
+    .nav-back { font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 5px; }
+    .nav-back:hover { text-decoration: underline; }
+
+    /* HERO */
+    .hero { background: #0f172a; color: white; padding: 4rem 2rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(124,58,237,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+    .hero-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #64748b; margin-bottom: 1rem; }
+    .hero-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
+    .hero-sub { color: #94a3b8; font-size: 15px; margin-bottom: 2rem; max-width: 580px; line-height: 1.7; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-tag { font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid #1e293b; color: #94a3b8; }
+    .hero-tag.hl { background: rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.4); color: #c4b5fd; }
+
+    /* LAYOUT */
+    .page { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+    .section { margin-bottom: 3rem; }
+    .section-title { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 0.6rem; margin-bottom: 1.5rem; }
+
+    /* STAT CARDS */
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; text-align: center; }
+    .stat-num { font-size: 1.8rem; font-weight: 600; line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 12px; color: var(--text-muted); }
+    .c-purple { color: var(--purple); } .c-green { color: var(--green); } .c-accent { color: var(--accent); } .c-orange { color: var(--orange); }
+
+    /* CARDS */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
+    .card-title { font-weight: 600; font-size: 15px; margin-bottom: 0.75rem; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 8px 12px; background: var(--bg); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+    .td-num { font-family: 'DM Mono', monospace; font-size: 13px; text-align: right; }
+
+    /* METRIC BADGES */
+    .good { color: var(--green); font-weight: 600; }
+    .warn { color: var(--orange); font-weight: 600; }
+    .crit { color: var(--red); font-weight: 600; }
+
+    /* CODE */
+    .code-block { font-family: 'DM Mono', monospace; font-size: 12px; background: #0f172a; color: #e2e8f0; padding: 1.25rem; border-radius: 8px; overflow-x: auto; line-height: 1.8; margin-top: 0.5rem; }
+    .cm { color: #64748b; } .ck { color: #93c5fd; } .cs { color: #86efac; } .cn { color: #fca5a5; } .cf { color: #fbbf24; }
+
+    /* FEATURE GRID */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    .feature-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.875rem 1rem; }
+    .feature-name { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--accent); margin-bottom: 4px; }
+    .feature-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    .feature-signal { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    /* LIMITATION */
+    .limit-box { background: var(--orange-light); border: 1px solid var(--orange-border); border-radius: 8px; padding: 1rem 1.25rem; }
+    .limit-title { font-size: 13px; font-weight: 600; color: var(--orange); margin-bottom: 6px; }
+    .limit-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* FUTURE */
+    .future-list { list-style: none; }
+    .future-item { display: flex; gap: 0.75rem; font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.5rem; align-items: flex-start; }
+    .future-num { font-family: 'DM Mono', monospace; font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; color: var(--text-muted); flex-shrink: 0; margin-top: 2px; }
+
+    /* BAR CHART */
+    .bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .bar-label { font-size: 13px; width: 140px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 20px; background: var(--bg); border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+    .bar-fill { height: 100%; border-radius: 3px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 600; color: white; font-family: 'DM Mono', monospace; }
+
+    footer { padding: 2rem; text-align: center; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border); }
+    @media (max-width: 640px) {
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .page { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Jihun Baek</span>
+  <a href="/" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Machine Learning · Network Security · Python</div>
+    <div class="hero-title">AI-Based Network Attack Classifier</div>
+    <div class="hero-sub">A multi-class ML classifier trained on 220,000 real network payloads to detect and categorise cyber attack types — Brute Force, SQL Injection, XSS, and System Command Execution — without relying on static signature rules.</div>
+    <div class="hero-tags">
+      <span class="hero-tag hl">Python</span>
+      <span class="hero-tag hl">scikit-learn</span>
+      <span class="hero-tag hl">XGBoost</span>
+      <span class="hero-tag">Random Forest</span>
+      <span class="hero-tag">Pandas</span>
+      <span class="hero-tag">Feature Engineering</span>
+      <span class="hero-tag">Nov – Dec 2024</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- STATS -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num c-purple">220K</div>
+      <div class="stat-label">Network payloads</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num c-green">92.6%</div>
+      <div class="stat-label">Best model accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num c-accent">9</div>
+      <div class="stat-label">Engineered features</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num c-orange">3</div>
+      <div class="stat-label">Models compared</div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <div class="section-title">Project Overview</div>
+    <div class="card">
+      <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1rem;">Traditional network security systems rely on rule-based signature matching — a brittle approach that requires constant manual updates and fails to detect novel attack variants. This project replaces that approach with a machine learning classifier trained on raw HTTP payloads from network security appliance logs.</p>
+      <p style="color:var(--text-secondary);line-height:1.7;">The model classifies each payload into one of five categories: <strong>Brute Force</strong>, <strong>Cross-Site Scripting</strong>, <strong>SQL Injection</strong>, <strong>System Command Execution</strong>, or <strong>Normal</strong>. The system was developed as part of the AI Security Operations (AI-SOC) specialist training programme in South Korea.</p>
+    </div>
+  </div>
+
+  <!-- DATASET -->
+  <div class="section">
+    <div class="section-title">Dataset</div>
+    <div class="card">
+      <table>
+        <tr><th>Label</th><th>Attack Type</th><th class="td-num">Count</th><th class="td-num">% of Total</th></tr>
+        <tr><td><span style="font-family:'DM Mono',monospace;font-size:12px;">Brute_Force</span></td><td style="color:var(--text-secondary)">Credential stuffing via automated tools (Hydra); 100% POST requests</td><td class="td-num">135,037</td><td class="td-num">61.4%</td></tr>
+        <tr><td><span style="font-family:'DM Mono',monospace;font-size:12px;">normal</span></td><td style="color:var(--text-secondary)">Legitimate traffic baseline</td><td class="td-num">44,000</td><td class="td-num">20.0%</td></tr>
+        <tr><td><span style="font-family:'DM Mono',monospace;font-size:12px;">Cross_Site_Scripting</span></td><td style="color:var(--text-secondary)">XSS via scanner tools (Arachni, Nikto); 97% GET requests</td><td class="td-num">16,542</td><td class="td-num">7.5%</td></tr>
+        <tr><td><span style="font-family:'DM Mono',monospace;font-size:12px;">SQL_Injection</span></td><td style="color:var(--text-secondary)">SQLmap-driven injection attempts; HTTP/1.1 only</td><td class="td-num">12,525</td><td class="td-num">5.7%</td></tr>
+        <tr><td><span style="font-family:'DM Mono',monospace;font-size:12px;">System_Cmd_Execution</span></td><td style="color:var(--text-secondary)">OS command injection; identified via Connector user-agent</td><td class="td-num">11,896</td><td class="td-num">5.4%</td></tr>
+        <tr style="background:var(--bg)"><td colspan="2"><strong>Total</strong></td><td class="td-num"><strong>220,000</strong></td><td class="td-num"><strong>100%</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FEATURE ENGINEERING -->
+  <div class="section">
+    <div class="section-title">Feature Engineering</div>
+    <p style="color:var(--text-secondary);font-size:14px;margin-bottom:1.25rem;line-height:1.7;">Rather than vectorising raw text (computationally expensive at this scale), we performed statistical frequency analysis across label-payload pairs to identify keywords that appeared with high discriminative frequency for specific attack classes. 9 binary/categorical features were extracted from each payload string.</p>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-name">method</div>
+        <div class="feature-desc">HTTP method (GET=1, POST=0)</div>
+        <div class="feature-signal">Signal: Brute Force = 100% POST</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">ver</div>
+        <div class="feature-desc">HTTP version (1.0=1, 1.1=0)</div>
+        <div class="feature-signal">Signal: Brute Force skews HTTP/1.0</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">word</div>
+        <div class="feature-desc">OS/tool keyword: hydra(1), linux(2), win(3), mac(4), nikto(5)</div>
+        <div class="feature-signal">Signal: hydra → Brute Force exclusively</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">sql</div>
+        <div class="feature-desc">Presence of "sqlmap" in payload (binary)</div>
+        <div class="feature-signal">Signal: Strong indicator of SQL_Injection</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">ar</div>
+        <div class="feature-desc">Presence of "arachni" scanner (binary)</div>
+        <div class="feature-signal">Signal: XSS + SysCmd attacks</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">uid</div>
+        <div class="feature-desc">Presence of "userid" parameter (binary)</div>
+        <div class="feature-signal">Signal: Brute Force login targeting</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">zap</div>
+        <div class="feature-desc">Presence of OWASP ZAP scanner (binary)</div>
+        <div class="feature-signal">Signal: Active scanning / Brute Force</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">connector</div>
+        <div class="feature-desc">Presence of "connector" user-agent (binary)</div>
+        <div class="feature-signal">Signal: System_Cmd_Execution only</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">apple</div>
+        <div class="feature-desc">Presence of "applewebkit" user-agent (binary)</div>
+        <div class="feature-signal">Signal: Normal traffic distinguisher</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.25rem;">
+      <div class="card">
+        <div class="card-title">Preprocessing Pipeline</div>
+        <div class="code-block"><cm># Feature extraction and encoding pipeline</cm>
+<ck>def</ck> prepro(data):
+    <cm># Structural features from payload token positions</cm>
+    data[<cs>'method'</cs>] = data[<cs>'payload'</cs>].str.split().str[<cf>0</cf>]  <cm># GET / POST</cm>
+    data[<cs>'ver'</cs>]    = data[<cs>'payload'</cs>].str.split().str[<cf>1</cf>]  <cm># HTTP version</cm>
+
+    <cm># Keyword-based binary feature extraction</cm>
+    data[<cs>'sql'</cs>]       = data[<cs>'payload'</cs>].apply(add_sql)       <cm># sqlmap presence</cm>
+    data[<cs>'word'</cs>]      = data[<cs>'payload'</cs>].apply(add_word)      <cm># OS/tool keyword</cm>
+    data[<cs>'ar'</cs>]        = data[<cs>'payload'</cs>].apply(add_ar)        <cm># arachni scanner</cm>
+    data[<cs>'uid'</cs>]       = data[<cs>'payload'</cs>].apply(add_uid)       <cm># userid param</cm>
+    data[<cs>'connector'</cs>] = data[<cs>'payload'</cs>].apply(add_con)       <cm># connector UA</cm>
+    data[<cs>'zap'</cs>]       = data[<cs>'payload'</cs>].apply(add_zap)       <cm># ZAP scanner</cm>
+    data[<cs>'apple'</cs>]     = data[<cs>'payload'</cs>].apply(add_apple)     <cm># AppleWebKit UA</cm>
+
+    <cm># Label encoding</cm>
+    data[<cs>'ver'</cs>]    = data[<cs>'ver'</cs>].map({<cs>'HTTP/1.1'</cs>:<cf>0</cf>, <cs>'HTTP/1.0'</cs>:<cf>1</cf>})
+    data[<cs>'method'</cs>] = data[<cs>'method'</cs>].map({<cs>'POST'</cs>:<cf>0</cf>, <cs>'GET'</cs>:<cf>1</cf>})
+
+    <ck>return</ck> data[[<cs>'method'</cs>,<cs>'ver'</cs>,<cs>'word'</cs>,<cs>'uid'</cs>,<cs>'ar'</cs>,<cs>'sql'</cs>,<cs>'connector'</cs>,<cs>'zap'</cs>,<cs>'apple'</cs>]], tg</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODEL TRAINING -->
+  <div class="section">
+    <div class="section-title">Model Training</div>
+    <div class="card" style="margin-bottom:1rem;">
+      <div class="card-title">Training Setup</div>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Train / Test Split</td><td><span style="font-family:'DM Mono',monospace;font-size:13px;">80% / 20% (stratified by label)</span></td></tr>
+        <tr><td>Random Seed</td><td><span style="font-family:'DM Mono',monospace;font-size:13px;">42</span></td></tr>
+        <tr><td>Test Set Size</td><td><span style="font-family:'DM Mono',monospace;font-size:13px;">44,000 samples</span></td></tr>
+        <tr><td>Stratification</td><td>Preserved class distribution across splits</td></tr>
+        <tr><td>Hardware</td><td>Intel i9-13900, 64GB RAM, RTX 4070</td></tr>
+        <tr><td>Environment</td><td>Python 3.12.7 · Anaconda · Jupyter Lab</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Algorithm Selection — Why Random Forest</div>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.7;">Three classifiers were evaluated. Random Forest (bagging ensemble) was selected as the primary model because it outperformed both XGBoost and Logistic Regression in overall accuracy, while training significantly faster. The bagging approach — randomly sampling subsets of data and averaging results across parallel trees — proved more stable than voting-based ensembles for this imbalanced dataset.</p>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="section">
+    <div class="section-title">Results</div>
+
+    <!-- Model comparison bars -->
+    <div class="card" style="margin-bottom:1rem;">
+      <div class="card-title">Model Accuracy Comparison</div>
+      <div style="margin-top:0.75rem;">
+        <div class="bar-row">
+          <span class="bar-label">Random Forest</span>
+          <div class="bar-track"><div class="bar-fill" style="width:92.6%;background:#7c3aed;">92.6%</div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">XGBoost</span>
+          <div class="bar-track"><div class="bar-fill" style="width:92.6%;background:#1d4ed8;">92.6%</div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Logistic Regression</span>
+          <div class="bar-track"><div class="bar-fill" style="width:91.7%;background:#64748b;">91.7%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Per-class metrics -->
+    <div class="card">
+      <div class="card-title">Random Forest — Per-Class Classification Report (Test Set: 44,000 samples)</div>
+      <table style="margin-top:0.75rem;">
+        <tr><th>Class</th><th>Precision</th><th>Recall</th><th>F1-Score</th><th>Support</th></tr>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:12px;">Brute_Force</span></td>
+          <td class="td-num good">0.99</td><td class="td-num good">1.00</td><td class="td-num good">0.99</td>
+          <td class="td-num">27,008</td>
+        </tr>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:12px;">normal</span></td>
+          <td class="td-num good">0.93</td><td class="td-num good">0.99</td><td class="td-num good">0.96</td>
+          <td class="td-num">8,800</td>
+        </tr>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:12px;">SQL_Injection</span></td>
+          <td class="td-num good">1.00</td><td class="td-num good">0.87</td><td class="td-num good">0.93</td>
+          <td class="td-num">2,505</td>
+        </tr>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:12px;">Cross_Site_Scripting</span></td>
+          <td class="td-num warn">0.55</td><td class="td-num warn">0.87</td><td class="td-num warn">0.67</td>
+          <td class="td-num">3,308</td>
+        </tr>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:12px;">System_Cmd_Execution</span></td>
+          <td class="td-num good">1.00</td><td class="td-num crit">0.02</td><td class="td-num crit">0.04</td>
+          <td class="td-num">2,379</td>
+        </tr>
+        <tr style="background:var(--bg)">
+          <td><strong>Weighted Avg</strong></td>
+          <td class="td-num"><strong>0.95</strong></td><td class="td-num"><strong>0.93</strong></td><td class="td-num"><strong>0.91</strong></td>
+          <td class="td-num"><strong>44,000</strong></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- LIMITATIONS -->
+  <div class="section">
+    <div class="section-title">Known Limitations</div>
+    <div class="limit-box" style="margin-bottom:0.75rem;">
+      <div class="limit-title">System_Cmd_Execution — Recall: 0.02</div>
+      <div class="limit-text">The model almost completely missed System Command Execution attacks (recall = 0.02, F1 = 0.04). This is a consequence of the keyword-based feature engineering approach — the <code style="font-family:'DM Mono',monospace;font-size:12px;background:rgba(0,0,0,0.08);padding:1px 5px;border-radius:3px;">connector</code> feature, while unique to this class, was insufficient as a sole discriminator. The class is also the smallest in the dataset (5.4%), amplifying the imbalance effect.</div>
+    </div>
+    <div class="limit-box" style="background:var(--red-light);border-color:var(--red-border);">
+      <div class="limit-title" style="color:var(--red);">Class Imbalance</div>
+      <div class="limit-text">Brute Force accounts for 61.4% of samples, pulling overall accuracy upward. The weighted average F1 of 0.91 is flattered by Brute Force's F1 of 0.99. The macro average F1 of 0.72 is a more accurate representation of true cross-class performance.</div>
+    </div>
+  </div>
+
+  <!-- FUTURE IMPROVEMENTS -->
+  <div class="section">
+    <div class="section-title">Future Improvements</div>
+    <ul class="future-list">
+      <li><span class="future-num">01</span>Replace keyword-based feature extraction with TF-IDF or embedding vectorisation of full payload text — eliminates the need for manual keyword curation and captures richer signal.</li>
+      <li><span class="future-num">02</span>Apply SMOTE or class-weight balancing to address the Brute Force dominance and improve System_Cmd_Execution recall.</li>
+      <li><span class="future-num">03</span>Hyperparameter tuning via GridSearchCV or Bayesian Optimisation (Optuna) to improve XSS and SysCmd performance.</li>
+      <li><span class="future-num">04</span>Evaluate on external datasets (UNSW-NB15, KISTI Network Intrusion) to test generalisation beyond the training domain.</li>
+      <li><span class="future-num">05</span>Explore deep learning approaches (LSTM or transformer-based) for sequence-aware payload classification.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>AI-Based Network Attack Classifier · Jihun Baek · 2024 · <a href="/" style="color:var(--accent);text-decoration:none;">jihun.me</a></footer>
+</body>
+</html>
