@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jihun Baek — Cyber Security Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0d1117;
+      --bg-2:         #161b22;
+      --bg-3:         #1c2128;
+      --border:       #30363d;
+      --border-light: #21262d;
+      --text-1:       #e6edf3;
+      --text-2:       #8b949e;
+      --text-3:       #6e7681;
+      --teal:         #2dd4bf;
+      --teal-dim:     rgba(45,212,191,0.12);
+      --teal-border:  rgba(45,212,191,0.3);
+      --amber:        #f59e0b;
+      --amber-dim:    rgba(245,158,11,0.12);
+      --red:          #f85149;
+      --red-dim:      rgba(248,81,73,0.12);
+      --red-border:   rgba(248,81,73,0.3);
+      --purple:       #a78bfa;
+      --purple-dim:   rgba(167,139,250,0.12);
+      --green:        #3fb950;
+      --green-dim:    rgba(63,185,80,0.12);
+      --blue:         #58a6ff;
+      --blue-dim:     rgba(88,166,255,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-1);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,23,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 54px;
+    }
+    .nav-name {
+      font-weight: 700; font-size: 14px;
+      letter-spacing: 0.01em; color: var(--text-1);
+    }
+    .nav-name span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.75rem; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-2);
+      font-size: 13px; font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-1); }
+    .nav-resume {
+      background: var(--teal) !important;
+      color: #0d1117 !important;
+      padding: 5px 14px; border-radius: 5px;
+      font-size: 13px !important; font-weight: 600 !important;
+    }
+    .nav-resume:hover { opacity: 0.85; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--border-light); }
+
+    /* ── SECTION HEADERS ── */
+    .section-heading {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-heading h2 {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--text-1);
+    }
+    .section-heading .sh-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+    .section-heading .sh-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--teal);
+      font-weight: 500; letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+
+    /* ── HERO ── */
+    #hero { padding-top: 5rem; padding-bottom: 5rem; }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 140px;
+      gap: 3rem; align-items: start;
+    }
+    .hero-photo {
+      width: 140px; height: 140px;
+      border-radius: 10px; object-fit: cover;
+      object-position: center top;
+      border: 2px solid var(--border);
+      filter: grayscale(20%);
+    }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--teal);
+      letter-spacing: 0.06em; margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 24px; height: 1px; background: var(--teal);
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 0.5rem;
+      color: var(--text-1);
+    }
+    .hero-role {
+      font-size: 16px; color: var(--text-2);
+      margin-bottom: 1.25rem; font-weight: 400;
+    }
+    .hero-bio {
+      font-size: 14px; color: var(--text-2);
+      max-width: 500px; line-height: 1.75;
+      margin-bottom: 1.75rem;
+    }
+    .hero-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .hero-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 6px;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: all 0.15s;
+      border: 1px solid var(--border);
+      color: var(--text-2); background: var(--bg-2);
+    }
+    .hero-link:hover { border-color: var(--text-2); color: var(--text-1); }
+    .hero-link.primary {
+      background: var(--teal); color: #0d1117;
+      border-color: var(--teal); font-weight: 600;
+    }
+    .hero-link.primary:hover { opacity: 0.85; }
+
+    /* ── CERT STRIP ── */
+    .cert-strip {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+      margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .cert-badge {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 7px; padding: 8px 14px;
+      font-size: 13px; font-weight: 500; color: var(--text-1);
+    }
+    .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+    .cert-level { font-size: 11px; color: var(--text-3); font-weight: 400; margin-top: 1px; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    .skill-group {
+      background: var(--bg-2); border: 1px solid var(--border-light);
+      border-radius: 8px; padding: 1.1rem 1.25rem;
+    }
+    .skill-group-title {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.75rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .skill-tag {
+      font-size: 12px; padding: 3px 9px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: 4px; color: var(--text-2);
+      font-weight: 500;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid; grid-template-columns: 148px 1fr;
+      gap: 1.5rem; padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-3);
+      line-height: 1.5; padding-top: 2px;
+    }
+    .exp-company {
+      font-size: 12px; color: var(--teal);
+      margin-top: 4px; font-weight: 500;
+    }
+    .exp-title { font-weight: 600; font-size: 15px; margin-bottom: 0.65rem; color: var(--text-1); }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.65; padding-left: 1.1rem; position: relative;
+      margin-bottom: 0.35rem;
+    }
+    .exp-bullets li::before {
+      content: '▸'; position: absolute; left: 0;
+      color: var(--teal); font-size: 10px; top: 4px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 1rem; }
+    .project-card {
+      background: var(--bg-2); border: 1px solid var(--border-light);
+      border-radius: 10px; padding: 1.35rem 1.5rem;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .project-card:hover {
+      border-color: var(--border);
+      background: var(--bg-3);
+    }
+    .project-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem;
+    }
+    .project-title { font-weight: 600; font-size: 14px; color: var(--text-1); }
+    .project-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-3);
+      white-space: nowrap; flex-shrink: 0; padding-top: 2px;
+    }
+    .project-desc {
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.7; margin-bottom: 0.9rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .ptag {
+      font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: 4px;
+      letter-spacing: 0.03em;
+    }
+    /* Semantic tag colours — consistent across all project cards */
+    /* ptag-lang  = programming languages (Python, Bash…)       → blue  */
+    /* ptag-tool  = tools / frameworks (Docker, scikit-learn…)  → teal  */
+    /* ptag-sec   = security categories (XSS, OSINT, OWASP…)   → red   */
+    .ptag-lang  { background: var(--blue-dim);   color: var(--blue);   border: 1px solid rgba(88,166,255,0.3); }
+    .ptag-tool  { background: var(--teal-dim);   color: var(--teal);   border: 1px solid var(--teal-border); }
+    .ptag-sec   { background: var(--red-dim);    color: var(--red);    border: 1px solid var(--red-border); }
+
+    .project-link-row {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 0.75rem; font-size: 12px;
+      color: var(--text-3);
+    }
+    .project-link-row a {
+      color: var(--teal); text-decoration: none; font-weight: 500;
+    }
+    .project-link-row a:hover { text-decoration: underline; }
+
+    .sev { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .sev-critical { background: var(--red-dim); color: var(--red); border: 1px solid var(--red-border); }
+    .sev-high     { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+
+    /* ── EDUCATION ── */
+    .edu-list { display: flex; flex-direction: column; gap: 0; }
+    .edu-item {
+      display: grid; grid-template-columns: 148px 1fr; gap: 1.5rem;
+      padding: 1.25rem 0; border-bottom: 1px solid var(--border-light);
+    }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-year { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); padding-top: 2px; }
+    .edu-school { font-weight: 600; font-size: 15px; color: var(--text-1); }
+    .edu-degree { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem; text-align: center;
+      font-size: 12px; color: var(--text-3);
+      border-top: 1px solid var(--border-light);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    footer a { color: var(--teal); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .container { padding: 0 1.25rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo { display: none; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      section { padding: 3rem 0; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">jihun<span>.</span>me</span>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="/assets/Jihun_Baek_Resume.pdf" class="nav-resume" target="_blank">Resume ↗</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner fade-in">
+      <div>
+        <div class="hero-eyebrow">Available for roles · Sydney, AU</div>
+        <h1>Jihun Baek</h1>
+        <div class="hero-role">Cyber Security Analyst</div>
+        <p class="hero-bio">
+          AWS Certified Solutions Architect – Professional with hands-on experience in cloud infrastructure hardening, penetration testing, and CTF challenge engineering. I combine an offensive security mindset with practical systems administration.
+        </p>
+        <div class="hero-links">
+          <a href="mailto:bjhbrian916@gmail.com" class="hero-link">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            Email
+          </a>
+          <a href="https://linkedin.com/in/jihun-baek-505544270" class="hero-link" target="_blank">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/JihunB" class="hero-link" target="_blank">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="/assets/Jihun_Baek_Resume.pdf" class="hero-link primary" target="_blank">
+            Download Resume ↗
+          </a>
+        </div>
+        <div class="cert-strip">
+          <div style="width:100%;margin-bottom:0.6rem;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);">Certifications</span>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-dot"></div>
+            <div>
+              <div>AWS Solutions Architect – Professional</div>
+              <div class="cert-level">Feb 2025</div>
+            </div>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-dot"></div>
+            <div>
+              <div>AWS Solutions Architect – Associate</div>
+              <div class="cert-level">Jan 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img src="/assets/images/profile.jpg" alt="Jihun Baek" class="hero-photo">
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container fade-in">
+    <div class="section-heading">
+      <span class="sh-num">01</span>
+      <h2>Core Competencies</h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Offensive Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Burp Suite</span>
+          <span class="skill-tag">Metasploit</span>
+          <span class="skill-tag">OWASP Top 10</span>
+          <span class="skill-tag">Pentest Reporting</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Defensive / Monitoring</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Splunk</span>
+          <span class="skill-tag">Wireshark</span>
+          <span class="skill-tag">AWS GuardDuty</span>
+          <span class="skill-tag">AWS WAF</span>
+          <span class="skill-tag">SIEM & Log Analysis</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Cloud & Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS (SAP-level)</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Active Directory</span>
+          <span class="skill-tag">SPF/DKIM/DMARC</span>
+          <span class="skill-tag">Railway</span>
+          <span class="skill-tag">Vercel</span>
+          <span class="skill-tag">Jira</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Development</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Bash</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container fade-in">
+    <div class="section-heading">
+      <span class="sh-num">02</span>
+      <h2>Work Experience</h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-date">Nov 2025 – Present</div>
+          <div class="exp-company">Gomaps Trading</div>
+        </div>
+        <div>
+          <div class="exp-title">Junior IT Systems Administrator</div>
+          <ul class="exp-bullets">
+            <li>Manage network/cloud infrastructure and L1/L2 Jira ticket support; enforce access control via Active Directory Group Policies and monitor B2B site traffic with Wireshark for anomaly detection.</li>
+            <li>Architected cloud email delivery infrastructure (cut costs 15%) and hardened domains with SPF/DKIM/DMARC; contributed to secure development of company's B2B commercial web platform.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-date">Feb – Oct 2025</div>
+          <div class="exp-company">KnockOn</div>
+        </div>
+        <div>
+          <div class="exp-title">Challenge Developer & Technical Mentor</div>
+          <ul class="exp-bullets">
+            <li>Engineered 10+ CTF challenges on real-world CVEs (OWASP Top 10, privilege escalation, SSRF) for 3 cohorts — 73% avg solve rate.</li>
+            <li>Mentored trainees weekly on web exploitation, network traffic analysis, and vulnerability remediation.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container fade-in">
+    <div class="section-heading">
+      <span class="sh-num">03</span>
+      <h2>Projects</h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="projects-list">
+
+      <!-- CyberShield -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">CyberShield — Web Security SaaS Platform</div>
+          <div class="project-date">Jan – Jun 2026</div>
+        </div>
+        <p class="project-desc">Production SaaS that scans websites for ~60 security vulnerabilities across SSL/TLS, HTTP headers, email auth (SPF/DKIM/DMARC), open ports, malware reputation, and source code flaws. Built with FastAPI on Railway, Supabase PostgreSQL + Auth, and Vercel. Parallel async scan engine returns results in 5–15 seconds; real-time dashboard via Supabase WebSocket; 3 subscription tiers (Free / Plus $19 / Max $49).</p>
+        <div class="project-tags">
+          <span class="ptag ptag-lang">Python</span>
+          <span class="ptag ptag-tool">FastAPI</span>
+          <span class="ptag ptag-tool">Supabase</span>
+          <span class="ptag ptag-tool">Railway</span>
+          <span class="ptag ptag-tool">Vercel</span>
+          <span class="ptag ptag-sec">SSL/TLS</span>
+          <span class="ptag ptag-sec">DMARC</span>
+          <span class="ptag ptag-sec">Port Scanning</span>
+          <span class="ptag ptag-sec">Code Analysis</span>
+        </div>
+        <div class="project-link-row">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+          <a href="https://digitalcybershield.com" target="_blank">Live at digitalcybershield.com →</a>
+          &nbsp;·&nbsp;
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <a href="/cybershield.html" target="_blank">Full Write-up →</a>
+          &nbsp;·&nbsp;
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          <a href="https://github.com/JihunB/CyberShield" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <!-- Hack MAC -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Hack MAC 2025 — CTF Challenge Development & Infrastructure</div>
+          <div class="project-date">Jul – Oct 2025</div>
+        </div>
+        <p class="project-desc">Co-engineered 38 CTF challenges (web, crypto, forensics, OSINT, rev eng) for a Macquarie University competition across 3 academic levels. Containerised web challenges with Docker; wrote Python tooling to auto-generate JSON/Markdown inventories tracking paths, categories, difficulty, and deployment status.</p>
+        <div class="project-tags">
+          <span class="ptag ptag-lang">Python</span>
+          <span class="ptag ptag-tool">Docker</span>
+          <span class="ptag ptag-sec">Web Security</span>
+          <span class="ptag ptag-sec">OSINT</span>
+          <span class="ptag ptag-sec">Rev Eng</span>
+          <span class="ptag ptag-sec">Cryptography</span>
+        </div>
+        <div class="project-link-row">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Source under NDA — write-up available on request
+        </div>
+      </div>
+
+      <!-- LAMP Pentest -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Penetration Test — LAMP Bulletin Board System</div>
+          <div class="project-date">Jan – Feb 2025</div>
+        </div>
+        <p class="project-desc">Black-box pentest of a self-built LAMP web app. Identified 11 vulnerabilities including critical RCE via file upload, SQLi auth bypass, stored XSS, IDOR, and session fixation. Delivered a structured report with CVSS-style ratings, PoC steps, and patched code for each finding.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin:0.6rem 0;">
+          <span class="sev sev-critical">Critical: RCE · SQLi Bypass</span>
+          <span class="sev sev-high">High: XSS · IDOR · Session Fixation</span>
+        </div>
+        <div class="project-tags">
+          <span class="ptag ptag-tool">Burp Suite</span>
+          <span class="ptag ptag-sec">OWASP Top 10</span>
+          <span class="ptag ptag-sec">SQLi</span>
+          <span class="ptag ptag-sec">XSS</span>
+          <span class="ptag ptag-sec">RCE</span>
+          <span class="ptag ptag-sec">IDOR</span>
+        </div>
+        <div class="project-link-row">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <a href="/pentest-report.html" target="_blank">View Full Pentest Report →</a>
+        </div>
+      </div>
+
+      <!-- AI Classifier -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">AI-Based Network Attack Classifier</div>
+          <div class="project-date">Nov – Dec 2024</div>
+        </div>
+        <p class="project-desc">Multi-class ML classifier on 220,000 network payloads — detects Brute Force, SQL Injection, XSS, and System Command Execution. Engineered 9 features via attack-tool signature analysis (hydra → Brute Force, sqlmap → SQLi). Random Forest achieved 92.6% accuracy; Brute Force F1: 0.99, SQL Injection F1: 0.93.</p>
+        <div class="project-tags">
+          <span class="ptag ptag-lang">Python</span>
+          <span class="ptag ptag-tool">scikit-learn</span>
+          <span class="ptag ptag-tool">XGBoost</span>
+          <span class="ptag ptag-tool">Pandas</span>
+          <span class="ptag ptag-sec">Network Log Analysis</span>
+          <span class="ptag ptag-sec">Feature Engineering</span>
+        </div>
+        <div class="project-link-row">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <a href="/ai-attack-classifier.html" target="_blank">View Full Write-up →</a>
+          &nbsp;·&nbsp;
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          <a href="https://github.com/JihunB/AI-Based-Network-Attack-Classification" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container fade-in">
+    <div class="section-heading">
+      <span class="sh-num">04</span>
+      <h2>Education</h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div class="edu-year">2024 – 2025</div>
+        <div>
+          <div class="edu-school">Macquarie University</div>
+          <div class="edu-degree">Major in Cyber Security</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2021 – 2022</div>
+        <div>
+          <div class="edu-school">Handong Global University</div>
+          <div class="edu-degree">Major in Computer Science</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  jihun.me &nbsp;·&nbsp; <a href="mailto:bjhbrian916@gmail.com">bjhbrian916@gmail.com</a> &nbsp;·&nbsp; Sydney, NSW
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
