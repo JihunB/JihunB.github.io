@@ -172,8 +172,9 @@ hr { border: 0; border-top: var(--rule-hair) solid var(--color-rule); margin: 0;
 .career ul li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: var(--space-sm); border-top: var(--rule-hair) solid var(--color-rule-2); }
 .career__also { margin-top: var(--space-xl); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gap-columns); row-gap: var(--space-lg); }
 .career__also > div { padding-top: var(--space-md); border-top: var(--rule-hair) solid var(--color-rule); }
-.career__also h4 { margin: 0; font-size: var(--text-md); font-weight: var(--weight-strong); }
-.career__also h4 .status { margin-left: var(--space-xs); vertical-align: 0.1em; }
+.career__also h4 { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-sm); margin: 0; font-size: var(--text-md); font-weight: var(--weight-strong); line-height: 1.4; }
+.career__also h4 > span:first-child { min-width: 0; padding-top: var(--space-3xs); }
+.career__also h4 .status { flex: none; white-space: nowrap; }
 .career__also p { margin-top: var(--space-xs); color: var(--color-ink-2); font-size: var(--text-md); }
 .career__also .work__stack { margin-top: var(--space-sm); }
 
