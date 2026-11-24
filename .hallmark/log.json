@@ -1,0 +1,31 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "shape": "engagement record (home), long document (case studies)",
+  "theme": "custom",
+  "axes": "light/grotesk-sans/chromatic-vermillion",
+  "hero": "Settled: name and one sentence left, koreanpages.com.au architecture with open findings right",
+  "nav": "wordmark left, section links, resume link and mode switch right",
+  "footer": "one line, name left, source right",
+  "imagery": "product screenshots, PoC captures, SVG architecture diagrams, portrait",
+  "photos": [],
+  "entry": "hero",
+  "fingerprint": "record-hero/ledger/career/table-band/cred-tables/contact",
+  "sections": [
+   "hero",
+   "work",
+   "experience",
+   "capabilities",
+   "credentials",
+   "contact"
+  ],
+  "signature": "koreanpages.com.au architecture with four open findings marked in the accent",
+  "waived": [
+   "78"
+  ],
+  "prompt": "portfolio of a cyber security analyst and cloud engineer, engineering case studies for hiring managers",
+  "date": "2026-11-24"
+ }
+]

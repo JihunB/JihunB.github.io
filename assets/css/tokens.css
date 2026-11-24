@@ -1,0 +1,120 @@
+/* jihun.me design tokens. Every colour and face on the site resolves here. See design.md. */
+:root {
+  color-scheme: light dark;
+
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-body: 1.0625rem; --text-lg: 1.25rem; --text-xl: 1.5rem; --text-2xl: 1.75rem;
+  --text-h1: clamp(2.5rem, 2.2vw + 1.6rem, 3.75rem);
+  --text-h1-sub: clamp(1.375rem, 0.8vw + 1.1rem, 1.875rem);
+  --text-section: clamp(1.875rem, 1.25vw + 1.375rem, 2.5rem);
+  --text-title: clamp(1.25rem, 0.5vw + 1.05rem, 1.5rem);
+  --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.3125rem);
+  --text-figure: clamp(1.75rem, 1.2vw + 1.2rem, 2.5rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+
+  --container: 1360px; --gutter: 64px; --gap-columns: 32px; --measure: 60ch;
+  --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --nav-height: 64px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+
+  /* Light: cool neutral paper, graphite ink, one vermillion signal (the reviewer's red pen). Neutrals at hue 250, accent at hue 32. */
+  --color-paper: oklch(98.4% 0.003 250);
+  --color-paper-2: oklch(95.8% 0.004 250);
+  --color-paper-3: oklch(93% 0.005 250);
+  --color-ink: oklch(21% 0.012 255);
+  --color-ink-2: oklch(35% 0.012 255);
+  --color-muted: oklch(47% 0.012 255);
+  --color-rule: oklch(88.5% 0.006 250);
+  --color-rule-2: oklch(76% 0.008 250);
+  --color-accent: oklch(53% 0.19 32);
+  --color-accent-ink: oklch(98.5% 0.008 40);
+  --color-accent-soft: oklch(94.5% 0.03 32);
+  --color-focus: oklch(53% 0.19 32);
+
+  /* Severity and status: the pentest report and finding states only. Text tone on a soft tint. */
+  --color-sev-critical: oklch(44% 0.16 27);  --color-sev-critical-soft: oklch(94.5% 0.03 27);
+  --color-sev-high: oklch(46% 0.12 55);      --color-sev-high-soft: oklch(95% 0.035 70);
+  --color-sev-medium: oklch(45% 0.09 95);    --color-sev-medium-soft: oklch(95.5% 0.04 100);
+  --color-sev-low: oklch(44% 0.09 160);      --color-sev-low-soft: oklch(95.5% 0.03 160);
+  --color-error: oklch(48% 0.17 27); --color-success: oklch(44% 0.09 160);
+
+  /* Code: a quiet plate with five syntax roles. */
+  --color-code-bg: oklch(95.8% 0.004 250);
+  --color-code-ink: oklch(25% 0.012 255);
+  --color-code-comment: oklch(50% 0.012 255);
+  --color-code-keyword: oklch(45% 0.13 260);
+  --color-code-string: oklch(43% 0.1 150);
+  --color-code-number: oklch(48% 0.11 60);
+  --color-code-danger: oklch(46% 0.17 27);
+
+  --font-display: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-body: var(--font-display);
+  --font-outlier: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --weight-body: 400; --weight-strong: 600; --weight-display: 640;
+
+  --radius-card: 6px; --radius-pill: 6px; --radius-chip: 4px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.028em; --tracking-section: -0.022em;
+}
+
+/* Dark: graphite, elevation by lightness, same hues, accent lifted and calmed. */
+:root[data-mode="dark"] {
+  --color-paper: oklch(17% 0.008 255);
+  --color-paper-2: oklch(20.5% 0.009 255);
+  --color-paper-3: oklch(14.5% 0.007 255);
+  --color-ink: oklch(94% 0.006 250);
+  --color-ink-2: oklch(83% 0.008 250);
+  --color-muted: oklch(71% 0.01 250);
+  --color-rule: oklch(30% 0.01 255);
+  --color-rule-2: oklch(42% 0.012 255);
+  --color-accent: oklch(70% 0.15 34);
+  --color-accent-ink: oklch(18% 0.03 34);
+  --color-accent-soft: oklch(27% 0.05 34);
+  --color-focus: oklch(72% 0.15 34);
+  --color-sev-critical: oklch(78% 0.12 27);  --color-sev-critical-soft: oklch(26% 0.05 27);
+  --color-sev-high: oklch(80% 0.11 65);      --color-sev-high-soft: oklch(26% 0.04 65);
+  --color-sev-medium: oklch(84% 0.1 100);    --color-sev-medium-soft: oklch(26% 0.035 100);
+  --color-sev-low: oklch(80% 0.1 160);       --color-sev-low-soft: oklch(25% 0.03 160);
+  --color-error: oklch(76% 0.13 27); --color-success: oklch(78% 0.1 160);
+  --color-code-bg: oklch(14.5% 0.007 255);
+  --color-code-ink: oklch(90% 0.008 250);
+  --color-code-comment: oklch(66% 0.012 250);
+  --color-code-keyword: oklch(78% 0.1 255);
+  --color-code-string: oklch(80% 0.1 150);
+  --color-code-number: oklch(82% 0.1 70);
+  --color-code-danger: oklch(77% 0.13 27);
+  --weight-body: 360; --weight-strong: 580; --weight-display: 620;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-mode]) {
+    --color-paper: oklch(17% 0.008 255);
+    --color-paper-2: oklch(20.5% 0.009 255);
+    --color-paper-3: oklch(14.5% 0.007 255);
+    --color-ink: oklch(94% 0.006 250);
+    --color-ink-2: oklch(83% 0.008 250);
+    --color-muted: oklch(71% 0.01 250);
+    --color-rule: oklch(30% 0.01 255);
+    --color-rule-2: oklch(42% 0.012 255);
+    --color-accent: oklch(70% 0.15 34);
+    --color-accent-ink: oklch(18% 0.03 34);
+    --color-accent-soft: oklch(27% 0.05 34);
+    --color-focus: oklch(72% 0.15 34);
+    --color-sev-critical: oklch(78% 0.12 27);  --color-sev-critical-soft: oklch(26% 0.05 27);
+    --color-sev-high: oklch(80% 0.11 65);      --color-sev-high-soft: oklch(26% 0.04 65);
+    --color-sev-medium: oklch(84% 0.1 100);    --color-sev-medium-soft: oklch(26% 0.035 100);
+    --color-sev-low: oklch(80% 0.1 160);       --color-sev-low-soft: oklch(25% 0.03 160);
+    --color-error: oklch(76% 0.13 27); --color-success: oklch(78% 0.1 160);
+    --color-code-bg: oklch(14.5% 0.007 255);
+    --color-code-ink: oklch(90% 0.008 250);
+    --color-code-comment: oklch(66% 0.012 250);
+    --color-code-keyword: oklch(78% 0.1 255);
+    --color-code-string: oklch(80% 0.1 150);
+    --color-code-number: oklch(82% 0.1 70);
+    --color-code-danger: oklch(77% 0.13 27);
+    --weight-body: 360; --weight-strong: 580; --weight-display: 620;
+  }
+}
+:root[data-mode="light"] { color-scheme: light; }
+:root[data-mode="dark"] { color-scheme: dark; }
